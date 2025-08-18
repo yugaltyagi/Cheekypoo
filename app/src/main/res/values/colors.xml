@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Base Theme Colors (added FF for full opacity) -->
+    <color name="theme_start">#FFFF4B2B</color> <!-- Vibrant Red-Pink -->
+    <color name="theme_end">#FFFF416C</color>   <!-- Warm Pink-Purple -->
+
+    <!-- Shades -->
+    <color name="theme_light">#FFFF7B89</color>  <!-- Light Romantic Pink -->
+    <color name="theme_medium">#FFFF5A77</color> <!-- Medium Pink -->
+    <color name="theme_dark">#FFE63757</color>   <!-- Deep Red-Pink -->
+    <color name="theme_extra_dark">#FFB82C44</color> <!-- Wine Red -->
+
+    <!-- Theme Colors -->
+    <color name="theme_palette_start">#FFFF4B2B</color>
+    <color name="theme_palette_end">#FFFF416C</color>
+
+    <!-- Semantic Colors -->
+    <color name="theme_primary">@color/theme_palette_start</color>
+    <color name="theme_secondary">@color/theme_palette_end</color>
+    <color name="theme_error">#FFFF0000</color>
+
+    <!-- Transparent Variants (80 = 50% opacity) -->
+    <color name="theme_start_transparent">#80FF4B2B</color>
+    <color name="theme_end_transparent">#80FF416C</color>
+</resources>

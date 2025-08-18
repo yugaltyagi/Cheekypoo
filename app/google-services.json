@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "712406034259",
+    "project_id": "cheeky-poo",
+    "storage_bucket": "cheeky-poo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712406034259:android:efc2b22f187dad948063a6",
+        "android_client_info": {
+          "package_name": "com.example.cheekypoo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb8-vu_Rb35vk8LJmV50OBj_0mklQ_eBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

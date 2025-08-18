@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Focused state -->
+    <item android:color="@color/theme_dark" android:state_focused="true" />
+
+    <!-- Disabled state -->
+    <item android:alpha="0.38" android:color="@color/theme_light" android:state_enabled="false" />
+
+    <!-- Default state -->
+    <item android:color="@color/theme_light" />
+</selector>
