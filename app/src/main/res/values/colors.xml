@@ -25,4 +25,47 @@
     <!-- Transparent Variants (80 = 50% opacity) -->
     <color name="theme_start_transparent">#80FF4B2B</color>
     <color name="theme_end_transparent">#80FF416C</color>
+
+    <color name="purple_500">#FF6200EE</color>
+
+
+    <color name="theme_light_secondary">#B3FFFFFF</color>
+
+
+
+    <color name="pink_primary">#FF4B91</color>
+    <color name="pink_dark">#D43A75</color>
+    <color name="pink_light">#FF7CAE</color>
+
+    <!-- Background Colors -->
+    <color name="background_dark">#1A1A2E</color>
+    <color name="background_medium">#16213E</color>
+    <color name="card_dark">#242439</color>
+
+    <!-- Text Colors -->
+    <color name="white_alpha_70">#B3FFFFFF</color> <!-- 70% opacity -->
+    <color name="white_alpha_50">#80FFFFFF</color> <!-- 50% opacity -->
+    <color name="white_alpha_30">#4DFFFFFF</color> <!-- 30% opacity -->
+    <color name="white_alpha_20">#33FFFFFF</color> <!-- 20% opacity - ADDED -->
+
+    <!-- Accent Colors -->
+    <color name="purple_accent">#9D50BB</color>
+    <color name="blue_accent">#6F9EFF</color>
+
+    <!-- Social Brand Colors -->
+    <color name="google_red">#DB4437</color>
+    <color name="facebook_blue">#4267B2</color>
+    <color name="apple_black">#000000</color>
+
+    <!-- Status Colors -->
+    <color name="success_green">#4CAF50</color>
+    <color name="error_red">#F44336</color>
+    <color name="warning_yellow">#FFC107</color>
+
+    <!-- Gradient Colors -->
+    <color name="gradient_start">#0F3460</color>
+    <color name="gradient_mid">#533483</color>
+    <color name="gradient_end">#E94560</color>
+
+
 </resources>

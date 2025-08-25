@@ -33,4 +33,23 @@
     <string name="login_success">Login successful!</string>
     <string name="login_failed">Login failed. Please try again.</string>
     <string name="forgot_password_success">Password reset email sent</string>
+    <string name="Cheeky_poo">app_name</string>
+
+
+
+    <string name="login_to_continue">Login to continue</string>
+    <string name="email_address">Email Address</string>
+
+
+
+
+    <string name="login_with_google">Login with Google</string>
+    <string name="login_with_facebook">Login with Facebook</string>
+    <string name="login_with_twitter">Login with Twitter</string>
+
+    <string name="confirm_email_address">Confirm Email Address</string>
+    <string name="confirmation_code_sent">We\'ve sent a confirmation code to your email</string>
+    <string name="resend_code_in_30s">Resend code in 30s</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="terms_conditions">By continuing, you agree to our Terms &amp; Conditions</string>
 </resources>
