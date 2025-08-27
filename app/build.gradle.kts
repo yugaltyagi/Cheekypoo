@@ -2,11 +2,13 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+
+
 }
 
 android {
     namespace = "com.example.cheekypoo"
-    compileSdk = 35 // safer, more stable than 36 (Android 15 preview)
+    compileSdk = 35 // stable SDK
 
     defaultConfig {
         applicationId = "com.example.cheekypoo"
@@ -46,12 +48,15 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // Firebase (BoM manages all versions)
+    // ✅ Firebase BoM (manages all versions)
     implementation(platform("com.google.firebase:firebase-bom:34.1.0"))
+
+    // Firebase products
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-storage")
     implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-firestore") // <-- Firestore
 
     // UI Libraries
     implementation("com.github.bumptech.glide:glide:4.16.0")
@@ -63,5 +68,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-}
 
+
+}
