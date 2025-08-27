@@ -67,5 +67,16 @@
     <color name="gradient_mid">#533483</color>
     <color name="gradient_end">#E94560</color>
 
+    <!-- Additional colors for better theming -->
+    <color name="chip_stroke_unchecked">#1F000000</color> <!-- 12% black -->
+    <color name="chip_text_unchecked">#99000000</color>   <!-- 60% black -->
+
+
+    <!-- Purple Theme Colors (for chip styling) -->
+    <color name="theme_start_purple">#FF6A0DAD</color>  <!-- Purple -->
+    <color name="theme_dark_purple">#FF4D0080</color>   <!-- Dark Purple -->
+    <color name="theme_medium_purple">#FF8B4DFF</color> <!-- Medium Purple -->
+    <color name="theme_end_purple">#FFA97DFF</color>    <!-- Light Purple -->
+
 
 </resources>

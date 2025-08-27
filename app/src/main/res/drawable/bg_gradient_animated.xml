@@ -1,0 +1,35 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="45"
+                android:endColor="@color/theme_end"
+                android:startColor="@color/theme_start"
+                android:type="linear" />
+        </shape>
+    </aapt:attr>
+
+    <target android:name="gradient">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="3000"
+                    android:propertyName="startColor"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueFrom="@color/theme_start"
+                    android:valueTo="@color/theme_medium"
+                    android:valueType="colorType" />
+                <objectAnimator
+                    android:duration="3000"
+                    android:propertyName="endColor"
+                    android:repeatCount="infinite"
+                    android:repeatMode="reverse"
+                    android:valueFrom="@color/theme_end"
+                    android:valueTo="@color/theme_light"
+                    android:valueType="colorType" />
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>

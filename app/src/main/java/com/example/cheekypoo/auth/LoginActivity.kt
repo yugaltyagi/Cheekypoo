@@ -10,7 +10,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cheekypoo.MainActivity
 import com.example.cheekypoo.R
+import com.example.cheekypoo.activity.userProfileDetails
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
 
@@ -20,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnLogin: Button
     private lateinit var mRegister: TextView
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         emailEt = findViewById(R.id.etEmail)
         passwordEt = findViewById(R.id.etPassword)
@@ -36,8 +40,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Go to RegisterActivity
         mRegister.setOnClickListener {
-            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
         // Login button
@@ -57,9 +60,22 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    finish()
+                    val userId = auth.currentUser!!.uid
+                    db.collection("users").document(userId).get()
+                        .addOnSuccessListener { document ->
+                            if (document.exists()) {
+                                // ✅ Old user → MainActivity
+                                startActivity(Intent(this, MainActivity::class.java))
+                                finish()
+                            } else {
+                                // ✅ New user → UserDetailActivity
+                                startActivity(Intent(this, userProfileDetails::class.java))
+                                finish()
+                            }
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this, "Error checking user profile", Toast.LENGTH_SHORT).show()
+                        }
                 } else {
                     Toast.makeText(
                         this,

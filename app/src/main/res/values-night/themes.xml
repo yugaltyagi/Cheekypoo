@@ -25,6 +25,23 @@
         <item name="android:statusBarColor">@color/theme_extra_dark</item>
         <item name="android:navigationBarColor">@color/theme_extra_dark</item>
 
+        <!-- Customize your light theme here. -->
+
+        <item name="colorPrimaryDark">#4D0080</item>
+        <item name="colorAccent">#6A0DAD</item>
+
+
+
+        <!-- For Chip styling -->
+
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="android:checkable">true</item>
+
     </style>
+
+    <!-- Base application theme. -->
+
+
+
 
 </resources>

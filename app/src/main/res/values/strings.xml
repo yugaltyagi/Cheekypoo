@@ -36,11 +36,8 @@
     <string name="Cheeky_poo">app_name</string>
 
 
-
     <string name="login_to_continue">Login to continue</string>
     <string name="email_address">Email Address</string>
-
-
 
 
     <string name="login_with_google">Login with Google</string>
@@ -52,4 +49,16 @@
     <string name="resend_code_in_30s">Resend code in 30s</string>
     <string name="verify_email">Verify Email</string>
     <string name="terms_conditions">By continuing, you agree to our Terms &amp; Conditions</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dating">Dating</string>
+    <string name="message">Message</string>
+    <string name="profile">Profile</string>
+    <string name="favorite">favorite</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="share_app">Share App</string>
+    <string name="terms_and_conditions">Terms and Conditions\n\n</string>
+    <string name="developer">Developer</string>
+    <string name="nav_open">open\n</string>
+    <string name="nav_close">close\n</string>
 </resources>

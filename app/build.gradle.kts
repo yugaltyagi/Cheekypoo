@@ -7,6 +7,10 @@ plugins {
 }
 
 android {
+
+    buildFeatures {
+        viewBinding=true
+    }
     namespace = "com.example.cheekypoo"
     compileSdk = 35 // stable SDK
 
@@ -63,6 +67,9 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.airbnb.android:lottie:6.4.0")
     implementation("com.github.yatindeokar:MyLoadingButton:v1.0.1")
+    implementation(libs.androidx.gridlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     // Testing
     testImplementation(libs.junit)
