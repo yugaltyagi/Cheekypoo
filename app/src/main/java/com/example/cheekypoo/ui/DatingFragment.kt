@@ -1,60 +1,118 @@
 package com.example.cheekypoo.ui
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.cheekypoo.R
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import com.example.cheekypoo.adapter.DatingAdapter
+import com.example.cheekypoo.databinding.FragmentDatingBinding
+import com.example.cheekypoo.model.UserModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.yuyakaido.android.cardstackview.CardStackLayoutManager
+import com.yuyakaido.android.cardstackview.CardStackListener
+import com.yuyakaido.android.cardstackview.Direction
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DatingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DatingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentDatingBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var manager: CardStackLayoutManager
+    private lateinit var adapter: DatingAdapter
+    private var userList: ArrayList<UserModel> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dating, container, false)
+    ): View {
+        _binding = FragmentDatingBinding.inflate(inflater, container, false)
+
+        setupCardStack()
+        fetchUsers()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DatingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DatingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    /**
+     * Setup CardStack Layout Manager + Adapter
+     */
+    private fun setupCardStack() {
+        manager = CardStackLayoutManager(requireContext(), object : CardStackListener {
+            override fun onCardDragging(direction: Direction?, ratio: Float) {}
+
+            override fun onCardSwiped(direction: Direction?) {
+                if (manager.topPosition == userList.size) {
+                    Toast.makeText(requireContext(), "This is the last card!", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            override fun onCardRewound() {}
+            override fun onCardCanceled() {}
+            override fun onCardAppeared(view: View?, position: Int) {}
+            override fun onCardDisappeared(view: View?, position: Int) {}
+        })
+
+        // Card stack config (Tinder style)
+        manager.setVisibleCount(3)
+        manager.setTranslationInterval(8.0f)
+        manager.setScaleInterval(0.95f)
+        manager.setMaxDegree(20.0f)
+        manager.setDirections(Direction.HORIZONTAL)
+
+        binding.cardStackView.layoutManager = manager
+        binding.cardStackView.itemAnimator = DefaultItemAnimator()
+
+        // Empty adapter initially
+        adapter = DatingAdapter(requireContext(), userList)
+        binding.cardStackView.adapter = adapter
+    }
+
+    /**
+     * Fetch user data from Firebase Realtime Database
+     */
+    private fun fetchUsers() {
+        val database = FirebaseDatabase.getInstance()
+        database.getReference("users")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    Log.d(TAG, "onDataChange: $snapshot")
+                    if (snapshot.exists()) {
+                        userList.clear()
+                        for (data in snapshot.children) {
+                            val model = data.getValue(UserModel::class.java)
+                            model?.let { userList.add(it) }
+                        }
+                        userList.shuffle()
+
+                        // Update adapter with new data
+                        adapter = DatingAdapter(requireContext(), userList)
+                        binding.cardStackView.adapter = adapter
+
+                    } else {
+                        Toast.makeText(requireContext(), "No users found!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Data fetch failed: ${error.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

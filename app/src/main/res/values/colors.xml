@@ -79,4 +79,15 @@
     <color name="theme_end_purple">#FFA97DFF</color>    <!-- Light Purple -->
 
 
+
+    <color name="black_alpha_20">#33000000</color>
+    <color name="black_alpha_50">#80000000</color>
+
+    <color name="shimmer_start">#E0E0E0</color>
+    <color name="shimmer_end">#F5F5F5</color>
+    <color name="shimmer_highlight">#FFFFFF</color>
+    <color name="shimmer_dark_start">#3A3A3A</color>
+    <color name="shimmer_dark_end">#2B2B2B</color>
+
+
 </resources>

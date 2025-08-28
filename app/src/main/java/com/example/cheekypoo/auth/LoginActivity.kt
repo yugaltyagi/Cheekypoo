@@ -2,17 +2,13 @@ package com.example.cheekypoo.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cheekypoo.MainActivity
 import com.example.cheekypoo.R
-import com.example.cheekypoo.activity.userProfileDetails
+import com.example.cheekypoo.activity.UserProfileDetails
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
 
@@ -22,7 +18,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnLogin: Button
     private lateinit var mRegister: TextView
     private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +25,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
 
         emailEt = findViewById(R.id.etEmail)
         passwordEt = findViewById(R.id.etPassword)
@@ -41,6 +35,22 @@ class LoginActivity : AppCompatActivity() {
         // Go to RegisterActivity
         mRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        // Forgot password flow
+        forgotPassword.setOnClickListener {
+            val email = emailEt.text.toString().trim()
+            if (email.isEmpty()) {
+                Toast.makeText(this, "Enter your email to reset password", Toast.LENGTH_SHORT).show()
+            } else {
+                auth.sendPasswordResetEmail(email)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Reset link sent to your email", Toast.LENGTH_LONG).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Failed: ${it.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
         }
 
         // Login button
@@ -60,22 +70,30 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val userId = auth.currentUser!!.uid
-                    db.collection("users").document(userId).get()
-                        .addOnSuccessListener { document ->
-                            if (document.exists()) {
+                    val user = auth.currentUser
+                    if (user != null) {
+                        if (user.isEmailVerified) {
+                            val prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+                            val isNewUser = prefs.getBoolean("isNewUser", false)
+
+                            if (isNewUser) {
+                                // ✅ First-time login → UserProfileDetails
+                                prefs.edit().putBoolean("isNewUser", false).apply()
+                                startActivity(Intent(this, UserProfileDetails::class.java))
+                            } else {
                                 // ✅ Old user → MainActivity
                                 startActivity(Intent(this, MainActivity::class.java))
-                                finish()
-                            } else {
-                                // ✅ New user → UserDetailActivity
-                                startActivity(Intent(this, userProfileDetails::class.java))
-                                finish()
                             }
+                            finish()
+                        } else {
+                            Toast.makeText(
+                                this,
+                                "Please verify your email before logging in.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            auth.signOut()
                         }
-                        .addOnFailureListener {
-                            Toast.makeText(this, "Error checking user profile", Toast.LENGTH_SHORT).show()
-                        }
+                    }
                 } else {
                     Toast.makeText(
                         this,

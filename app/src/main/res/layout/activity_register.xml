@@ -223,49 +223,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Gender Selection -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Gender"
-                    android:textSize="14sp"
-                    android:textColor="@color/white_alpha_70"
-                    android:layout_marginBottom="8dp" />
-
-                <com.google.android.material.button.MaterialButtonToggleGroup
-                    android:id="@+id/toggleGender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    app:singleSelection="true"
-                    app:selectionRequired="true">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnMale"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Male"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        app:strokeColor="@color/pink_primary"
-                        app:strokeWidth="1dp"
-                        android:textColor="@color/white"
-                        app:cornerRadius="12dp"
-                        android:layout_marginEnd="8dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnFemale"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Female"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        app:strokeColor="@color/pink_primary"
-                        app:strokeWidth="1dp"
-                        android:textColor="@color/white"
-                        app:cornerRadius="12dp"
-                        android:layout_marginStart="8dp" />
-
-                </com.google.android.material.button.MaterialButtonToggleGroup>
 
                 <!-- Register Button with Ripple Effect -->
                 <com.google.android.material.button.MaterialButton

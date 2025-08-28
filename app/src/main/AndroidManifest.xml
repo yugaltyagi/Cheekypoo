@@ -15,10 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CheekyPoo">
         <activity
-            android:name=".activity.userProfileDetails"
-            android:exported="false">
+            android:name=".activity.UserProfileDetails"
+            android:exported="false" />
 
-        </activity>
         <activity
             android:name=".activity.SplashScreenActivity"
             android:exported="true">
@@ -36,7 +35,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
