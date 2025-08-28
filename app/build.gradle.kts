@@ -76,5 +76,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation("com.github.yuyakaido:CardStackView:v2.3.4")
+
 
 }
