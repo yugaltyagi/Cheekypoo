@@ -13,6 +13,9 @@ import androidx.navigation.ui.NavigationUI
 import com.example.cheekypoo.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 
+//import com.mongodb.kotlin.client.coroutine.MongoClient
+//import com.mongodb.kotlin.client.coroutine.MongoDatabase
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
@@ -76,3 +79,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 }
+
+

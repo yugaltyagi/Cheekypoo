@@ -77,6 +77,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation("com.github.yuyakaido:CardStackView:v2.3.4")
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.x.x") // Latest stable version
+//    implementation("org.mongodb:mongodb-driver-kotlin-coroutine:4.x.x")
 
 
 }

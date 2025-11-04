@@ -16,8 +16,10 @@
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <!-- Content container -->
         <LinearLayout
@@ -357,100 +359,100 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipPhotography"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Photography" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipShopping"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Shopping" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipKaraoke"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Karaoke" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipYoga"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Yoga" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipCooking"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Cooking" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipTennis"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Tennis" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipRun"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Run" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipSwimming"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Swimming" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipArt"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Art" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipTraveling"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Traveling" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipExtreme"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Extreme" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipMusic"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Music" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipDrink"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Drink" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipVideoGames"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:text="Video games" />
             </com.google.android.material.chip.ChipGroup>
 
