@@ -1,60 +1,92 @@
 package com.example.cheekypoo.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.cheekypoo.R
+import com.example.cheekypoo.databinding.FragmentProfileBinding
+import com.example.cheekypoo.model.UserModel
+import com.example.cheekypoo.utils.Config
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    ): View {
+        // Loading dialog show kar diye (agar tumne Config.showDialog implement kiya hai)
+        Config.showDialog(requireContext())
+
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        // Current logged in user aur uska phone number le rahe hain
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val phoneKey = currentUser?.phoneNumber
+
+        if (phoneKey.isNullOrEmpty()) {
+            // Agar user logged in nahi hai ya phone number available nahi hai
+            Log.w(TAG, "No current user or phone number is null/empty")
+            Config.hideDialog() // dialog ko close kar do
+            return binding.root
+        }
+
+        val usersRef = FirebaseDatabase.getInstance().getReference("users")
+        usersRef.child(phoneKey).get()
+            .addOnSuccessListener { snapshot ->
+                if (snapshot.exists()) {
+                    // Firebase se data mil gaya — UserModel me map kar rahe hain
+                    val data = snapshot.getValue(UserModel::class.java)
+
+                    // Safely values set kar rahe hain (agar null ho to empty string set karega)
+                    binding.name.setText(data?.Name ?: "")
+                    binding.email.setText(data?.Email ?: "")
+                    binding.number.setText(data?.Number ?: "")
+                    binding.Gender.setText(data?.Gender ?: "")
+                    binding.city.setText(data?.City ?: "")
+
+                    // Image safe load: agar Image null ho to placeholder dikhayega
+                    val imageUrl = data?.Image ?: ""
+                    Glide.with(requireContext())
+                        .load(if (imageUrl.isNotEmpty()) imageUrl else null)
+                        .placeholder(R.drawable.ic_person)
+                        .into(binding.userImage)
+                } else {
+                    // Agar users node exist nahi karta for this phoneKey
+                    Log.i(TAG, "User node does not exist for key: $phoneKey")
+                }
+                // Data load ho chuka — dialog hide kar do
+                Config.hideDialog()
+            }
+            .addOnFailureListener { ex ->
+                // Agar read me failure aaya to log kar do aur dialog hide kar do
+                Log.e(TAG, "Failed to read user data", ex)
+                Config.hideDialog()
+            }
+
+        // Agar tum fields ko read-only (non-editable) banana chahte ho to ye uncomment kar sakte ho:
+        // binding.name.isFocusable = false
+        // binding.name.isClickable = false
+        // binding.name.isCursorVisible = false
+        // ...same for baki fields
+
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        private const val TAG = "ProfileFragment"
     }
 }
